@@ -1,0 +1,11 @@
+:root{
+  --purple: #6b21a8;
+  --light-purple: #e9d5ff;
+  --white: #ffffff;
+}
+body{ margin:0; font-family: Arial, Helvetica, sans-serif; background: var(--white); color:#111; }
+.navbar{ background: var(--purple); color: white; padding: 12px 16px; }
+.container{ max-width:1000px; margin:20px auto; padding:0 16px; }
+.card{ background:white; border:1px solid #eee; padding:12px; border-radius:8px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.btn{ background:var(--purple); color:white; padding:8px 12px; border-radius:6px; border:none; cursor:pointer; }
+input, select, textarea{ padding:8px; border-radius:6px; border:1px solid #ddd; }
