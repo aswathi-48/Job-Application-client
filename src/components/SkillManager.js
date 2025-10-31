@@ -136,6 +136,8 @@
 
 import React, { useEffect, useState } from "react";
 import API from "../api";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SkillManager() {
   const [skills, setSkills] = useState([]);
@@ -175,21 +177,21 @@ export default function SkillManager() {
           { name: newSkill },
           { headers: { Authorization: `Bearer ${token}` } }
         );
-        alert("Skill updated successfully!");
+        toast.success("Company updated successfully!");
       } else {
         await API.post(
           "/skills/add",
           { name: newSkill },
           { headers: { Authorization: `Bearer ${token}` } }
         );
-        alert("Skill added successfully!");
+        toast.success("Company updated successfully!");
       }
 
       setNewSkill("");
       setEditId(null);
       fetchSkills();
     } catch (err) {
-      alert(err.response?.data?.message || "Action failed");
+      toast.error(err.response?.data?.message || "Action failed"); 
     }
   };
 
@@ -200,10 +202,10 @@ export default function SkillManager() {
       await API.delete(`/skills/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      alert("Skill deleted successfully!");
+      toast.success("Company deleted successfully!");
       fetchSkills();
     } catch (err) {
-      alert(err.response?.data?.message || "Delete failed");
+      toast.error(err.response?.data?.message || "Delete failed");
     }
   };
 
@@ -259,7 +261,7 @@ export default function SkillManager() {
                       onClick={() => handleEditClick(s)}
                       style={styles.editBtn}
                     >
-                      Edit
+                     ✏️Edit
                     </button>
                     <button
                       onClick={() => handleDelete(s._id)}
@@ -339,8 +341,8 @@ const styles = {
   },
   actions: { display: "flex", gap: "8px" },
   editBtn: {
-    background: "#ffc107",
-    color: "#000",
+    background: "#6b3fa0",
+    color: "#fff",
     border: "none",
     padding: "5px 10px",
     borderRadius: "5px",

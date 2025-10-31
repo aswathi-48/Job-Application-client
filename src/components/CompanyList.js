@@ -1,72 +1,9 @@
-// import React, { useEffect, useState } from "react";
-// import API from "../api";
 
-// export default function CompanyList() {
-//   const [companies, setCompanies] = useState([]);
-//   const [name, setName] = useState("");
-//   const [description, setDescription] = useState("");
-//   const [website, setWebsite] = useState("");
-
-//   const fetchCompanies = async () => {
-//     const res = await API.get("/companies");
-//     setCompanies(res.data);
-//   };
-
-//   useEffect(() => {
-//     fetchCompanies();
-//   }, []);
-
-//   const handleAdd = async (e) => {
-//     e.preventDefault();
-//     await API.post("/companies", { name, description, website });
-//     setName("");
-//     setDescription("");
-//     setWebsite("");
-//     fetchCompanies();
-//   };
-
-//   const handleDelete = async (id) => {
-//     await API.delete(`/companies/${id}`);
-//     fetchCompanies();
-//   };
-
-//   return (
-//     <div>
-//       <h2 style={{ color: "#6b3fa0" }}>Company Management</h2>
-
-//       <form onSubmit={handleAdd} style={{ marginBottom: "20px" }}>
-//         <input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
-//         <input placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
-//         <input placeholder="Website" value={website} onChange={(e) => setWebsite(e.target.value)} />
-//         <button type="submit" style={{ background: "#6b3fa0", color: "white" }}>Add</button>
-//       </form>
-
-//       <table style={{ width: "100%", borderCollapse: "collapse" }}>
-//         <thead style={{ background: "#ede4ff" }}>
-//           <tr>
-//             <th style={{ padding: "10px" }}>Name</th>
-//             <th>Description</th>
-//             <th>Website</th>
-//             <th>Action</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {companies.map((c) => (
-//             <tr key={c._id} style={{ borderBottom: "1px solid #ddd" }}>
-//               <td style={{ padding: "10px" }}>{c.name}</td>
-//               <td>{c.description}</td>
-//               <td><a href={c.website} target="_blank" rel="noreferrer">{c.website}</a></td>
-//               <td><button onClick={() => handleDelete(c._id)}>Delete</button></td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// }
 
 import React, { useEffect, useState } from "react";
 import API from "../api";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function CompanyList() {
   const [companies, setCompanies] = useState([]);
@@ -89,8 +26,7 @@ export default function CompanyList() {
       setLoading(false);
     } catch (err) {
       console.error(err);
-      setLoading(false);
-    }
+toast.error("Failed to fetch companies");    }
   };
 
   useEffect(() => {
@@ -139,19 +75,20 @@ export default function CompanyList() {
         await API.patch(`/companies/${editId}`, formData, {
           headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
         });
+        toast.success("Company updated successfully!");
       } else {
         // Add
         await API.post("/companies", formData, {
           headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" },
         });
+         toast.success("Company added successfully!");
       }
 
       fetchCompanies();
       handleCloseModal();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Failed to save company");
-    }
+toast.error(err.response?.data?.message || "Failed to save company");    }
   };
 
  const handleDelete = async (id) => {
@@ -159,7 +96,7 @@ export default function CompanyList() {
   try {
     const token = localStorage.getItem("token");
     await API.delete(`/companies/${id}`, { headers: { Authorization: `Bearer ${token}` } });
-    alert('deleted successfully')
+    toast.success("Company deleted successfully!");
     fetchCompanies(); 
   } catch (err) {
     console.error(err);
@@ -333,7 +270,7 @@ export default function CompanyList() {
                       marginRight: "5px",
                     }}
                   >
-                    ✏️ Edit
+                    ✏️Edit
                   </button>
                   <button
                     onClick={() => handleDelete(c._id)}

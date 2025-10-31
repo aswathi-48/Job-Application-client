@@ -12,7 +12,6 @@
 //   </div>)
 // }
 
-
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import UserList from "../components/UserList";
@@ -20,9 +19,10 @@ import CompanyList from "../components/CompanyList";
 import JobList from "../components/JobList";
 import Profile from "../components/Profile";
 import SkillManager from "../components/SkillManager";
+import DashboardHome from "../components/DashboardHome";
 
 export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState("users");
+  const [activeTab, setActiveTab] = useState("dashboard"); 
 
   const logout = () => {
     localStorage.removeItem("user");
@@ -35,13 +35,12 @@ export default function AdminDashboard() {
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} logout={logout} />
 
       <div style={{ flex: 1, padding: "20px" }}>
+        {activeTab === "dashboard" && <DashboardHome />}
         {activeTab === "profile" && <Profile />}
-
         {activeTab === "users" && <UserList />}
         {activeTab === "companies" && <CompanyList />}
         {activeTab === "jobs" && <JobList />}
         {activeTab === "skills" && <SkillManager />}
-
       </div>
     </div>
   );
