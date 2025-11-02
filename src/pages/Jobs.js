@@ -78,7 +78,7 @@ export default function Jobs() {
 
   return (
     <div>
-      <div className="navbar">Job Tracker</div>
+      {/* <div className="navbar">Job Tracker</div> */}
 
       <div
         className="container"

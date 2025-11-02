@@ -119,7 +119,7 @@ export default function Register() {
 
   return (
     <div style={styles.wrapper}>
-      <div style={styles.navbar}>Job Tracker</div>
+      {/* <div style={styles.navbar}>Job Tracker</div> */}
 
       <div style={styles.cardContainer}>
         <form onSubmit={handle} style={styles.card} encType="multipart/form-data">

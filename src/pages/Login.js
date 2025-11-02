@@ -25,9 +25,9 @@ export default function Login() {
   return (
     <div style={styles.page}>
       {/* Navbar */}
-      <div style={styles.navbar}>
+      {/* <div style={styles.navbar}>
         <h1 style={styles.logo}>Job<span style={{ color: "#fff" }}>Tracker</span></h1>
-      </div>
+      </div> */}
 
       {/* Login Card */}
       <div style={styles.container}>

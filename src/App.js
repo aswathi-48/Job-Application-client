@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Jobs from './pages/Jobs';
 import Admin from './pages/AdminDashboard';
+import Navbar from './pages/Navbar';
 
 function App(){
   const user = JSON.parse(localStorage.getItem('user') || 'null');
@@ -14,6 +15,7 @@ function App(){
   }
   return (
     <BrowserRouter>
+    <Navbar /> 
       <Routes>
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
